@@ -45,3 +45,4 @@ models/submitted_t5_base_checkpoint29640/optimizer.pt
 models/submitted_t5_base_checkpoint29640/rng_state.pth
 models/submitted_t5_base_checkpoint29640/scheduler.pt
 models/submitted_t5_base_checkpoint29640/training_args.bin
+# Generated prediction files

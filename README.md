@@ -1,76 +1,78 @@
 # HULAT-UC3M at ImageCLEFtoPicto 2026
 
-Code and selected artifacts for the HULAT-UC3M submission to the ImageCLEFtoPicto 2026 task.
+Reproducibility package for the HULAT-UC3M submission to the ImageCLEFtoPicto 2026 task: English text-to-pictogram generation with T5.
 
 ## Environment
 
-Tested with Python 3.10.18, PyTorch 2.5.1+cu121, Transformers 5.8.0, Datasets 4.8.5, and an NVIDIA GeForce RTX 3060 GPU with 12 GB of memory.
+Tested with:
+
+- Python 3.10.18
+- PyTorch 2.5.1+cu121
+- Transformers 5.8.0
+- Datasets 4.8.5
+- NVIDIA GeForce RTX 3060, 12 GB
 
 ## Installation
 
-    python3 -m venv .venv
+Clone the repository and make sure Git LFS downloads the model checkpoint:
+
+    git lfs install
+    git lfs pull
+
+Create the environment:
+
+    python3.10 -m venv .venv
     source .venv/bin/activate
     python -m pip install --upgrade pip
     pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cu121
     pip install -r requirements.txt
 
-## Reproducibility scope
+## Repository contents
 
-The English ARASAAC lexicon used during output normalisation is included as `resources/arasaac_english.json`. This file was obtained from the ARASAAC API endpoint `https://api.arasaac.org/v1/pictograms/all/en`.
+This repository includes:
 
-This repository provides the scripts, validation summary, and official submitted files used for the HULAT-UC3M run.
+- the training and inference scripts;
+- the English ARASAAC lexicon used during output normalisation;
+- the submitted T5 checkpoint, stored with Git LFS.
 
-The official task data are not redistributed. To rerun training or inference, place the task files in:
-
-    data/train.json
-    data/valid.json
-    data/test.json
-    data/arasaac_english.json
-
-The selected checkpoint should be placed in:
+The checkpoint is expected at:
 
     models/submitted_t5_base_checkpoint29640/
 
-## Training
-
-    python src/train_submitted_t5_base.py
-
-## Generate official submission
-
-    python src/generate_official_submission.py
-
-The final submission was generated with greedy decoding. Before writing the generated submission file, a minor output-normalisation step was applied using only training/validation data and the English ARASAAC lexicon. It did not use test references and affected 23 out of 4,306 test predictions.
-
-
-More details about the expected data files are provided in `docs/DATA.md`.
-
-
-## Reproduce the official submission from the released checkpoint
-
-After installing the environment, place the official ImageCLEFtoPicto files in:
-
-    data/train.json
-    data/valid.json
-    data/test.json
-
-The English ARASAAC lexicon used during output normalisation is already included as:
+The English ARASAAC lexicon is included at:
 
     resources/arasaac_english.json
 
-This file was obtained from the ARASAAC API endpoint:
+It was obtained from the ARASAAC API endpoint:
 
     https://api.arasaac.org/v1/pictograms/all/en
 
-Download the released checkpoint and place it in:
+## Data
 
-    models/submitted_t5_base_checkpoint29640/
+The official ImageCLEFtoPicto task data are not redistributed in this repository.
 
-Then regenerate the official submission with:
+To reproduce the submission, place the official task files in:
+
+    data/train.json
+    data/valid.json
+    data/test.json
+
+More details are provided in `docs/DATA.md`.
+
+## Generate the submitted run
+
+After installing the environment, downloading the Git LFS checkpoint, and placing the official task data in `data/`, run:
 
     python src/generate_official_submission.py
 
-The generated file will be written to:
+The generated prediction file will be written to:
 
     outputs/official_submission.json
 
-The official submitted prediction file is not redistributed in this repository to avoid releasing task-derived prediction outputs. The released checkpoint and script allow the submitted run to be regenerated locally.
+The official submitted prediction file is not redistributed in this repository. The provided code, included ARASAAC lexicon, official task data, and submitted checkpoint allow the prediction file to be regenerated locally.
+
+## Training
+
+The submitted model configuration can be trained with:
+
+    python src/train_submitted_t5_base.py

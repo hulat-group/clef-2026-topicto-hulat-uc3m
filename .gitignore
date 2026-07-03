@@ -10,39 +10,29 @@ env/
 
 # Official task data are not redistributed
 data/
-train.json
-valid.json
-test.json
 
-# Models and checkpoints
-checkpoint-*/
-
-# Intermediate outputs
-outputs/*raw*.json
-outputs/*postprocessed*.json
-
-# OS
-.DS_Store
-Thumbs.db
-
-# ARASAAC lexicon is not redistributed
-
-# ARASAAC lexicon is not redistributed
-
-# External checkpoint package
-submitted_t5_base_checkpoint29640.tar.gz
-
-# Generated or submitted prediction files
+# Generated outputs and submissions
+outputs/
 submission/
-outputs/official_submission.json
-outputs/raw_test_predictions_greedy.json
-outputs/postprocessed_test_predictions_greedy.json
 run.json
 run.zip
+official_submission.json
+raw_test_predictions_greedy.json
+postprocessed_test_predictions_greedy.json
 
 # Training state files not required for inference
 models/submitted_t5_base_checkpoint29640/optimizer.pt
 models/submitted_t5_base_checkpoint29640/rng_state.pth
 models/submitted_t5_base_checkpoint29640/scheduler.pt
 models/submitted_t5_base_checkpoint29640/training_args.bin
-# Generated prediction files
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Ignore nested trainer checkpoints and training state files
+checkpoint-*/
+models/**/checkpoint-*/
+models/**/*.pt
+models/**/*.pth
+models/**/training_args.bin

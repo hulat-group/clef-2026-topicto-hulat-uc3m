@@ -1,8 +1,12 @@
 # Data
 
-The official ImageCLEFtoPicto 2026 task data are not redistributed in this repository.
+The official ImageCLEFtoPicto 2026 task data are distributed by the competition organisers and are not included in this repository.
 
-To rerun training or generate predictions, authorised users should place the official task files in a local `data/` directory:
+To rerun training or generate predictions, authorised users should create a local `data/` directory:
+
+    mkdir -p data
+
+Then place the official task files as follows:
 
     data/train.json
     data/valid.json

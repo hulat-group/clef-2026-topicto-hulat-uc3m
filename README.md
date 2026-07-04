@@ -14,12 +14,6 @@ The submitted checkpoint is stored with Git LFS. After cloning, run:
     git lfs install
     git lfs pull
 
-Check that the model weights were downloaded correctly:
-
-    ls -lh models/submitted_t5_base_checkpoint29640/model.safetensors
-
-The file should be a large model file, approximately 892 MB, not a small Git LFS pointer.
-
 ## Environment
 
 The experiments were run with:
@@ -43,9 +37,13 @@ Install the dependencies:
 
 ## Data
 
-The official ImageCLEFtoPicto task data are not redistributed in this repository.
+The official ImageCLEFtoPicto task data are distributed by the competition organisers and are not included in this repository.
 
-To reproduce the submitted run, authorised users should place the official task files in:
+To reproduce the submitted run, authorised users should create a local `data/` directory:
+
+    mkdir -p data
+
+Then place the official task files as follows:
 
     data/train.json
     data/valid.json
